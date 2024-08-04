@@ -39,7 +39,7 @@ func TestGetFileFromConfigHome(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			os.Setenv(EnvConfigHome, tt.envValue)
 
-			got, err := getFileFromConfigHome()
+			got, err := getFilePath()
 			if err != nil {
 				t.Fatalf("getFileFromConfigHome() error = %v", err)
 			}
@@ -57,7 +57,7 @@ func TestGetFileFromConfigHome(t *testing.T) {
 
 func TestGetFileFromConfigHomeError(t *testing.T) {
 	// This test remains the same as before
-	_, err := getFileFromConfigHome()
+	_, err := getFilePath()
 	if err != nil {
 		t.Fatalf("getFileFromConfigHome() unexpected error: %v", err)
 	}

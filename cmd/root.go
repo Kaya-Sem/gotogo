@@ -5,8 +5,11 @@ Copyright © 2024 Kaya-Sem Van Cauwenberghe kayasemvc@gmail.com
 package cmd
 
 import (
+	"encoding/csv"
 	"fmt"
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/spf13/cobra"
 )
@@ -53,14 +56,77 @@ func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-// printTodos is a placeholder for the actual function that will print all todos
 func printTodos() {
-	fmt.Println("Printing all todos...")
-	// Implement the actual logic for printing todos here
+	filePath, err := getFilePath()
+
+	if err != nil {
+		fmt.Errorf("Could not get file path: %w", err)
+		return
+	}
+
+	todoItems, err := readTodos(filePath)
+	printItems(todoItems)
 }
 
-// createTodo is a placeholder for the actual function that will create a new todo
 func createTodo(todo string) {
-	fmt.Printf("Creating a new todo: %s\n", todo)
-	// Implement the actual logic for creating a new todo here
+	filePath, err := getFilePath()
+	if err != nil {
+		fmt.Printf("Could not get file path: %v\n", err)
+		return
+	}
+
+	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND, 0644)
+	if err != nil {
+		fmt.Printf("Could not open file: %v\n", err)
+		return
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	records, err := reader.ReadAll()
+	if err != nil {
+		fmt.Printf("Could not read CSV file: %v\n", err)
+		return
+	}
+
+	// Get the last ID
+	var lastID int
+	if len(records) > 0 {
+		lastRecord := records[len(records)-1]
+		lastID, err = strconv.Atoi(lastRecord[0])
+		if err != nil {
+			fmt.Printf("Could not parse last ID: %v\n", err)
+			return
+		}
+	}
+
+	// Increment the ID for the new record
+	newID := lastID + 1
+
+	// Get the current date in the desired format
+	currentDate := time.Now().Format("2006-01-02")
+
+	// Create the new record
+	newRecord := []string{
+		strconv.Itoa(newID),
+		todo,
+		"false",
+		currentDate,
+	}
+
+	// Append the new record to the file
+	writer := csv.NewWriter(file)
+	err = writer.Write(newRecord)
+	if err != nil {
+		fmt.Printf("Could not write to CSV file: %v\n", err)
+		return
+	}
+
+	writer.Flush()
+	if err := writer.Error(); err != nil {
+		fmt.Printf("Could not flush writer: %v\n", err)
+		return
+	}
+
+	fmt.Printf("Todo item with id %d added successfully", newID)
 }
