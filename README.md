@@ -2,8 +2,8 @@
 
 Gotogo is a command-line tool for managing your to-do list. It checks all completed items and removes those older than one day, while keeping items completed today as encouragement.
 
-place image here
-![img.png](img.png)
+![img](https://github.com/user-attachments/assets/99c32e7f-11c9-48d9-ac5e-b36487fb98eb)
+
 
 ## Features
 
