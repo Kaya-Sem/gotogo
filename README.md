@@ -1,7 +1,54 @@
 # Gotogo
 
-When using the tool, it will check all items that are done, and
-when older than 1 day, remove them. Items done today are kept, as
-encouragement.
+Gotogo is a command-line tool for managing your to-do list. It checks all completed items and removes those older than one day, while keeping items completed today as encouragement.
 
-> TODO: read and write to STDIN and files
+place image here
+![img.png](img.png)
+
+## Features
+
+- Automatically removes completed items older than one day
+- Keeps items completed today
+
+## Installation
+
+To install Gotogo, use `go get`:
+
+```sh
+go get github.com/Kaya-Sem/gotogo
+```
+Alternatively, you can download the latest release from GitHub:
+
+## Command Line Usage
+
+to use Gotogo from the command line, you can run the following commands:
+
+**Add a new to-do item:**
+
+```sh
+gotogo add "Your new to-do item
+```
+
+**List all to-do items:**
+
+```sh
+gotogo
+```
+
+**Mark a to-do item as completed:**
+
+```sh
+gotogo done <item_id>
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a new branch (git checkout -b feature-branch)
+3. Commit your changes (git commit -am 'Add new feature')
+4. Push to the branch (git push origin feature-branch)
+5. Create a new Pull Request
+
+# License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
