@@ -19,7 +19,7 @@ To install Gotogo, use `go get`:
 ```sh
 go install github.com/Kaya-Sem/gotogo@latest
 ```
-Alternatively, you can download the latest release from GitHub:
+Alternatively, you can download the latest [release](https://github.com/Kaya-Sem/gotogo/releases)
 
 ## Configuration
 
