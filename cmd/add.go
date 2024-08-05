@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -30,8 +27,6 @@ var addCmd = &cobra.Command{
 			fmt.Printf("Error adding todo item: %v\n", err)
 			return
 		}
-
-		fmt.Println("Todo item added successfully.")
 	},
 }
 
@@ -45,7 +40,7 @@ func createTodo(todo string) error {
 		return fmt.Errorf("could not get file path: %v", err)
 	}
 
-	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0644)
+	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0600)
 	if err != nil {
 		return fmt.Errorf("could not open file: %v", err)
 	}
@@ -59,13 +54,10 @@ func createTodo(todo string) error {
 	}
 
 	// Get the last ID
-	var lastID int
+	var lastID int = 0
+
 	if len(records) > 0 {
-		lastRecord := records[len(records)-1]
-		lastID, err = strconv.Atoi(lastRecord[0])
-		if err != nil {
-			return fmt.Errorf("could not parse last ID: %v", err)
-		}
+		lastID = getLastId(records)
 	}
 
 	// Increment the ID for the new record
@@ -95,4 +87,11 @@ func createTodo(todo string) error {
 	}
 
 	return nil
+}
+
+func getLastId(records [][]string) int {
+	lastRecord := records[len(records)-1]
+	lastID, _ := strconv.Atoi(lastRecord[0])
+
+	return lastID
 }
