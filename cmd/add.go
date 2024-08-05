@@ -30,8 +30,6 @@ var addCmd = &cobra.Command{
 			fmt.Printf("Error adding todo item: %v\n", err)
 			return
 		}
-
-		fmt.Println("Todo item added successfully.")
 	},
 }
 
@@ -45,7 +43,7 @@ func createTodo(todo string) error {
 		return fmt.Errorf("could not get file path: %v", err)
 	}
 
-	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0644)
+	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0600)
 	if err != nil {
 		return fmt.Errorf("could not open file: %v", err)
 	}
