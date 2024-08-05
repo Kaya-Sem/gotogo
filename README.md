@@ -15,7 +15,7 @@ Gotogo is a command-line tool for managing your to-do list. It checks all comple
 To install Gotogo, use `go get`:
 
 ```sh
-go get github.com/Kaya-Sem/gotogo
+go install github.com/Kaya-Sem/gotogo@latest
 ```
 Alternatively, you can download the latest release from GitHub:
 
