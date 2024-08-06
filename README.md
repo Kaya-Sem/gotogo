@@ -26,6 +26,11 @@ Alternatively, you can download the latest [release](https://github.com/Kaya-Sem
 Gotogo requires a CSV file to store your to-do items. 
 This file should be located in your XDG configuration home directory under `.config/gotodo/todo.csv`.
 
+**TLDR**
+```bash
+mkdir -p ~/.config/gotogo; echo "id,title,completed,timestamp" > ~/.config/gotogo/todo.csv
+```
+
 ### Example
 
 On most Linux systems, this would be:
