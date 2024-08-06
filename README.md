@@ -64,7 +64,7 @@ gotogo
 **Add a new to-do item:**
 
 ```sh
-gotogo add "Your new to-do item
+gotogo add "Your new to-do item"
 ```
 
 
