@@ -29,8 +29,6 @@ var doneCmd = &cobra.Command{
 			fmt.Printf("Error marking item as done: %v\n", err)
 			return
 		}
-
-		fmt.Printf("Todo item with ID %d marked as done.\n", id)
 	},
 }
 
