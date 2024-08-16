@@ -1,9 +1,6 @@
 name: Build
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -27,9 +24,9 @@ jobs:
     - name: Build binaries
       run: |
           mkdir -p dist
-          GOOS=linux GOARCH=amd64 go build -o dist/todo-linux-amd64
-          GOOS=darwin GOARCH=amd64 go build -o dist/todo-darwin-amd64
-          GOOS=windows GOARCH=amd64 go build -o dist/todo-windows-amd64.exe
+          GOOS=linux GOARCH=amd64 go build -o dist/commandtrein-linux
+          GOOS=darwin GOARCH=amd64 go build -o dist/commandtrein-macos
+          GOOS=windows GOARCH=amd64 go build -o dist/commandtrein-windows
 
     - name: Get Latest Commit Info
       id: commit_info
@@ -52,8 +49,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/todo-linux-amd64
-        asset_name: todo-linux-amd64
+        asset_path: ./dist/commandtrein-linux
+        asset_name: commandtrein-linux
         asset_content_type: application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -62,8 +59,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/todo-darwin-amd64
-        asset_name: todo-darwin-amd64
+        asset_path: ./dist/commandtrein-macos
+        asset_name: commandtrein-macos
         asset_content_type: application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -72,8 +69,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/todo-windows-amd64.exe
-        asset_name: todo-windows-amd64.exe
+        asset_path: ./dist/commandtrein-windows
+        asset_name: commandtrein.exe
         asset_content_type: application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
